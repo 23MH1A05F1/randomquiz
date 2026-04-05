@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Result</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .result-card {
+            text-align: center;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            padding: 60px 50px;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .trophy {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .score-display {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .score-label {
+            color: #a0aec0;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+
+        .feedback {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding: 14px 24px;
+            border-radius: 12px;
+        }
+
+        .feedback.excellent {
+            background: rgba(72, 187, 120, 0.2);
+            color: #68d391;
+            border: 1px solid rgba(72, 187, 120, 0.3);
+        }
+
+        .feedback.good {
+            background: rgba(236, 201, 75, 0.2);
+            color: #f6e05e;
+            border: 1px solid rgba(236, 201, 75, 0.3);
+        }
+
+        .feedback.poor {
+            background: rgba(252, 129, 74, 0.2);
+            color: #fc8181;
+            border: 1px solid rgba(252, 129, 74, 0.3);
+        }
+
+        .home-btn {
+            display: inline-block;
+            padding: 14px 40px;
+            font-size: 15px;
+            font-weight: 700;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .home-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="result-card">
+
+        <div class="trophy"
+             th:text="${score >= 7} ? '🏆' : (${score >= 5} ? '👍' : '📚')">🏆</div>
+
+        <h2>Quiz Completed!</h2>
+
+        <div class="score-display"
+             th:text="${score} + '/' + ${total}">0/10</div>
+
+        <p class="score-label">Your Score</p>
+
+        <div th:classappend="${score >= 7} ? 'excellent' : (${score >= 5} ? 'good' : 'poor')"
+             class="feedback"
+             th:text="${score >= 7} ? '🎉 Excellent! Keep it up!' :
+                      (${score >= 5} ? '👏 Good effort! Keep practising!' :
+                                       '📖 Keep studying and try again!')">
+            Feedback
+        </div>
+
+        <a href="/" class="home-btn">TRY ANOTHER QUIZ</a>
+    </div>
+</body>
+</html>
